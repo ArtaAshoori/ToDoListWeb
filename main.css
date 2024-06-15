@@ -64,9 +64,15 @@ main h1 {
   margin-bottom: 1rem;
 }
 
+.tasks-btn {
+  display: flex;
+  gap: 1rem;
+}
+
 #tasks {
   display: grid;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 #tasks .task {
@@ -105,7 +111,11 @@ main h1 {
   color: darkorange;
 }
 
-.btn-remove-all {
+.success-btn{
+  background-color: green !important;
+}
+
+.btn-tasks-all {
   margin-top: 1rem;
   padding: 0.75rem;
   font-size: 0.75rem;
@@ -114,4 +124,9 @@ main h1 {
   cursor: pointer;
   color: white;
   background-color: black;
+}
+
+.btn-tasks-all:hover {
+  color: black;
+  background-color: white;
 }

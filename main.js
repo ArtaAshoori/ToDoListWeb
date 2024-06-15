@@ -55,7 +55,8 @@ form.addEventListener("submit", (event) => {
   input.value = "";
 
   task_success_element.addEventListener("click", () => {
-    task_element.style.backgroundColor = "green";
+    task_success_element.innerHTML === "Success" ? task_success_element.innerHTML = "Cancel" : task_success_element.innerHTML = "Success";
+    task_element.classList.toggle("success-btn");
   });
 
   task_delete_element.addEventListener("click", () => {
@@ -64,11 +65,12 @@ form.addEventListener("submit", (event) => {
 
   task_edit_element.addEventListener("click", () => {
     if (task_edit_element.innerHTML == "Edit") {
-      task_input_element.removeAttribute("readonly");
       task_edit_element.innerHTML = "Save";
+      input.focus();
     } else {
-      task_input_element.setAttribute("readonly", "readonly");
       task_edit_element.innerHTML = "Edit";
+      task_input_element.value = input.value;
+      input.value = "";
     }
   });
 });
@@ -78,7 +80,3 @@ btn_remove_all.addEventListener("click", () => {
     list_element.removeChild(list_element.firstChild);
   }
 });
-
-// function input = meghdar input o bgire
-// event braye input ha onchange
-// daynamic
