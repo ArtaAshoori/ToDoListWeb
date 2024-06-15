@@ -1,0 +1,117 @@
+/* Global css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  user-select: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+}
+
+/* Header css */
+header {
+  padding: 2rem 5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#new-task-form {
+  display: flex;
+}
+
+#new-task-input {
+  width: 50%;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  margin-right: 1.5rem;
+  background-color: white;
+  color: black;
+}
+
+#new-task-submit {
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: white;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Main css */
+main {
+  padding: 2rem 5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#tasks {
+  display: grid;
+  gap: 1rem;
+}
+
+#tasks .task {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  margin-right: 1.5rem;
+  background-color: white;
+}
+
+#tasks .task .content .text {
+  color: black;
+}
+
+#tasks .task .content .text:not(:read-only) {
+  color: darkblue;
+}
+
+.task .actions button {
+  margin: 0 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.task .actions .success {
+  color: darkgreen;
+}
+
+.task .actions .delete {
+  color: darkred;
+}
+
+.task .actions .edit {
+  color: darkorange;
+}
+
+.btn-remove-all {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 2rem;
+  border: 1px solid white;
+  cursor: pointer;
+  color: white;
+  background-color: black;
+}
