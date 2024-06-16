@@ -130,3 +130,10 @@ main h1 {
   color: black;
   background-color: white;
 }
+
+.hidden {
+  display: none;
+}
+.visible {
+  display: flex;
+}

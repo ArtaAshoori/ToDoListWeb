@@ -1,7 +1,13 @@
 const form = document.querySelector("#new-task-form");
 const input = document.querySelector("#new-task-input");
 const list_element = document.querySelector("#tasks");
+
 const btn_remove_all = document.querySelector('#remove-all');
+
+const btn_filter_all = document.querySelector('#filter-all')
+const btn_filter_success = document.querySelector('#filter-success')
+const btn_filter_not_success = document.querySelector('#filter-not-success')
+
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -66,6 +72,7 @@ form.addEventListener("submit", (event) => {
   task_edit_element.addEventListener("click", () => {
     if (task_edit_element.innerHTML == "Edit") {
       task_edit_element.innerHTML = "Save";
+      input.value = task_input_element.value
       input.focus();
     } else {
       task_edit_element.innerHTML = "Edit";
@@ -80,3 +87,31 @@ btn_remove_all.addEventListener("click", () => {
     list_element.removeChild(list_element.firstChild);
   }
 });
+
+const filterTasks = (status) => {
+  const tasks = document.querySelectorAll(".task");
+  tasks.forEach(task => {
+    switch (status) {
+      case "all":
+        task.style.display = "flex"
+        break;
+      case "success":
+        // task.classList.contains("success-btn") ? task.classList.add("visible") : task.classList.add("hidden");
+        task.classList.contains("success-btn") ? task.style.display = "flex" : task.style.display = "none"
+        break;
+      case "not-success":
+        // task.classList.contains("success-btn") ? task.classList.add("hidden") : task.classList.add("visible")
+        !task.classList.contains("success-btn") ? task.style.display = "flex" : task.style.display = "none"
+        break;
+    }
+    // if (status === "all") {
+    // } else if (status === "success") {
+    // } else if (status === "not-success") {
+    // } else {
+    // }
+  });
+}
+
+btn_filter_all.addEventListener('click', () => filterTasks("all"));
+btn_filter_success.addEventListener('click', () => filterTasks("success"));
+btn_filter_not_success.addEventListener('click', () => filterTasks("not-success"));
