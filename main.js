@@ -8,23 +8,12 @@ const btn_filter_all = document.querySelector('#filter-all')
 const btn_filter_success = document.querySelector('#filter-success')
 const btn_filter_not_success = document.querySelector('#filter-not-success')
 
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const task = input.value;
-
-  if (!task) {
-    alert("Please fill out the task");
-    return;
-  }
-
+const createTaskElement = (task) => {
   const task_element = document.createElement("div");
   task_element.classList.add("task");
 
   const task_content_element = document.createElement("div");
   task_content_element.classList.add("content");
-
   task_element.appendChild(task_content_element);
 
   const task_input_element = document.createElement("input");
@@ -32,7 +21,6 @@ form.addEventListener("submit", (event) => {
   task_input_element.type = "text";
   task_input_element.value = task;
   task_input_element.setAttribute("readonly", "readonly");
-
   task_content_element.appendChild(task_input_element);
 
   const task_actions_element = document.createElement("div");
@@ -41,25 +29,26 @@ form.addEventListener("submit", (event) => {
   const task_success_element = document.createElement("button");
   task_success_element.classList.add("success");
   task_success_element.innerHTML = "Success";
+  task_actions_element.appendChild(task_success_element);
 
   const task_delete_element = document.createElement("button");
   task_delete_element.classList.add("delete");
   task_delete_element.innerHTML = "Delete";
+  task_actions_element.appendChild(task_delete_element);
 
   const task_edit_element = document.createElement("button");
   task_edit_element.classList.add("edit");
   task_edit_element.innerHTML = "Edit";
-
   task_actions_element.appendChild(task_edit_element);
-  task_actions_element.appendChild(task_delete_element);
-  task_actions_element.appendChild(task_success_element);
 
   task_element.appendChild(task_actions_element);
 
-  list_element.appendChild(task_element);
+  addTaskActions(task_element, task_input_element, task_edit_element, task_success_element, task_delete_element);
 
-  input.value = "";
+  return task_element;
+}
 
+const addTaskActions = (task_element, task_input_element, task_edit_element, task_success_element, task_delete_element) => {
   task_success_element.addEventListener("click", () => {
     task_success_element.innerHTML === "Success" ? task_success_element.innerHTML = "Cancel" : task_success_element.innerHTML = "Success";
     task_element.classList.toggle("success-btn");
@@ -72,14 +61,37 @@ form.addEventListener("submit", (event) => {
   task_edit_element.addEventListener("click", () => {
     if (task_edit_element.innerHTML == "Edit") {
       task_edit_element.innerHTML = "Save";
-      input.value = task_input_element.value
-      input.focus();
+      task_input_element.removeAttribute("readonly");
+      task_input_element.focus();
+      // input.value = task_input_element.value
+      // input.focus();
     } else {
+      if (task_input_element.value.trim() === "") {
+        alert("Task cannot be empty");
+        task_input_element.focus();
+        return;
+      }
       task_edit_element.innerHTML = "Edit";
-      task_input_element.value = input.value;
-      input.value = "";
+      task_input_element.setAttribute("readonly", "readonly");
+      // task_input_element.value = input.value;
+      // input.value = "";
     }
   });
+}
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const task = input.value;
+
+  if (!task) {
+    alert("Please fill out the task");
+    return;
+  }
+
+  const task_element = createTaskElement(task);
+  list_element.appendChild(task_element);
+  input.value = "";
 });
 
 btn_remove_all.addEventListener("click", () => {
@@ -101,6 +113,7 @@ const filterTasks = (status) => {
         break;
       case "not-success":
         // task.classList.contains("success-btn") ? task.classList.add("hidden") : task.classList.add("visible")
+        // task.classList.contains("success-btn") ? task.style.display = "none" : task.style.display = "flex"
         !task.classList.contains("success-btn") ? task.style.display = "flex" : task.style.display = "none"
         break;
     }

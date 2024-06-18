@@ -89,7 +89,7 @@ main h1 {
 }
 
 #tasks .task .content .text:not(:read-only) {
-  color: darkblue;
+  color: black;
 }
 
 .task .actions button {
@@ -131,9 +131,9 @@ main h1 {
   background-color: white;
 }
 
-.hidden {
+/* .hidden {
   display: none;
 }
 .visible {
   display: flex;
-}
+} */
