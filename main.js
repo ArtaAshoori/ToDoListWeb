@@ -38,34 +38,34 @@ const createTaskElement = (task) => {
 }
 
 const addTaskActions = (task_element, task_input_element, task_edit_element, task_success_element, task_delete_element) => {
-  task_success_element.addEventListener("click", () => {
-    task_success_element.innerHTML === "Success" ? task_success_element.innerHTML = "Cancel" : task_success_element.innerHTML = "Success";
+  task_success_element.addEventListener("click", toggleSuccess);
+  task_delete_element.addEventListener("click", toggleDelete);
+  task_edit_element.addEventListener("click", toggleEdit);
+
+  function toggleSuccess() {
+    task_success_element.textContent = task_success_element.textContent === "Success" ? "Cancel" : "Success";
     task_element.classList.toggle("success-btn");
-  });
+  }
 
-  task_delete_element.addEventListener("click", () => {
+  function toggleDelete() {
     list_element.removeChild(task_element);
-  });
+  }
 
-  task_edit_element.addEventListener("click", () => {
-    if (task_edit_element.innerHTML == "Edit") {
-      task_edit_element.innerHTML = "Save";
+  function toggleEdit() {
+    if (task_edit_element.textContent === "Edit") {
+      task_edit_element.textContent = "Save";
       task_input_element.removeAttribute("readonly");
       task_input_element.focus();
-      // input.value = task_input_element.value
-      // input.focus();
     } else {
       if (task_input_element.value.trim() === "") {
         alert("Task cannot be empty");
         task_input_element.focus();
         return;
       }
-      task_edit_element.innerHTML = "Edit";
+      task_edit_element.textContent = "Edit";
       task_input_element.setAttribute("readonly", "readonly");
-      // task_input_element.value = input.value;
-      // input.value = "";
     }
-  });
+  }
 }
 
 form.addEventListener("submit", (event) => {
@@ -97,20 +97,12 @@ const filterTasks = (status) => {
         task.style.display = "flex"
         break;
       case "success":
-        // task.classList.contains("success-btn") ? task.classList.add("visible") : task.classList.add("hidden");
         task.classList.contains("success-btn") ? task.style.display = "flex" : task.style.display = "none"
         break;
       case "not-success":
-        // task.classList.contains("success-btn") ? task.classList.add("hidden") : task.classList.add("visible")
-        // task.classList.contains("success-btn") ? task.style.display = "none" : task.style.display = "flex"
         !task.classList.contains("success-btn") ? task.style.display = "flex" : task.style.display = "none"
         break;
     }
-    // if (status === "all") {
-    // } else if (status === "success") {
-    // } else if (status === "not-success") {
-    // } else {
-    // }
   });
 }
 
